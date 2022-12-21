@@ -10,11 +10,11 @@ The process of extracting the spectra from the raw time-domain data involves two
 ### catsperMATconverter 
 Collating the raw sample and reference waveform(s) into a single standardised .mat file. Additional metadata is captured in this file, including, for example, sample thickness, temperature or other contextual information. 
 
-![catsperMATconverter main GUI](https://github.com/CamTHz/catsper/blob/main/docs/images/catsper_converter_main_gui.png)
+![catsperMATconverter main GUI](/images/catsper_converter_main_gui.png)
 
 ### catsper
 The main CaTSper tool is designed to read the .mat file and carry out all subsequent signal processing steps. The tool can be used to display the time-domain waveform, apply any required truncation to the waveforms, select and apply suitable Fourier transformation parameters and output of the spectra.
 
-![catsper main GUI](https://github.com/CamTHz/catsper/blob/main/docs/images/catsper_main_gui.png)
+![catsper main GUI](/images/catsper_main_gui.png)
 
 ## Detailed Description
