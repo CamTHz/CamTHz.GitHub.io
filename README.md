@@ -18,3 +18,5 @@ The main CaTSper tool is designed to read the .mat file and carry out all subseq
 ![catsper main GUI](/images/catsper_main_gui.png)
 
 ## Detailed Description
+- [CaTSper step-by-step tutorial](/catsper_tutorial.md)
+- [CaTSper detailed description of processing steps](/catsper_function_ref.md)
