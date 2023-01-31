@@ -43,3 +43,9 @@ A straight line was fitted to unwrapped phase against frequency data from 0.05 t
 ### Refractive Index
 
 ### Dielectric Constant
+
+## Data Manipulation
+
+### Finding Peaks
+
+[MATLAB peak prominence](https://uk.mathworks.com/help/signal/ug/prominence.html)
