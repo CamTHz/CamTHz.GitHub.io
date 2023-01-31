@@ -48,4 +48,5 @@ A straight line was fitted to unwrapped phase against frequency data from 0.05 t
 
 ### Finding Peaks
 
-[MATLAB peak prominence](https://uk.mathworks.com/help/signal/ug/prominence.html)
+The MATLAB built-in function [findpeaks](https://uk.mathworks.com/help/signal/ref/findpeaks.html) is used to find peaks for a set of selected data (e.g. absorption coefficient $\alpha$) against another (e.g. frequency). A peak is defined such that it has a value greater than its adjacent neighbours or has a value of infinity. A minimum peak [prominence](https://uk.mathworks.com/help/signal/ug/prominence.html) can be specified such that only peaks with prominence greater than that will be recorded.
+
