@@ -16,11 +16,21 @@ $$ \Delta t_{1etl} = \Delta t + \frac{2H n_{eff}}{c}$$
 
 ### Setting Frequency Range and Spectral Resolution
 
+<!-- stopband? -->
+
 ### Choice of Apodisation Function
 
 ### Dynamic Range
 
 ### Amplitude and Phase
+
+Amplitude and phase data is obtained by unwrapping the frequency domain data. 
+The built-in MATLAB ['unwrap'](https://uk.mathworks.com/help/matlab/ref/unwrap.html) function is adopted as it eliminates discontinuities between consecutive phases by adding multiples of $\pm 2 \pi$ until the difference is less than $\pi$.
+Due to the high signal-to-noise ratio at 0.8 THz, it is set as the starting point for unwrapping phase to reduce errors. This is instrument specific and one can change the value accordingly by accessing the 'TDSunwrap' function in the Catsper.m code.
+<!-- create this as an editable value on the app? then this sentence needs to be updated -->
+Frequency domain data, that corresponds to frequencies greater than 0.8 THz, will be unwrapped in increasing values starting at 0.8 THz, and vice versa for data corresponding to frequencies less than 0.8 THz.
+A straight line was fitted to unwrapped phase against frequency data from 0.05 to 0.4 THz. The intercept of the striaght line at 0 THz gives the phase offset. The phase offset is then applied for correction to all phase data.
+
 
 ## Frequency Domain Analysis
 
