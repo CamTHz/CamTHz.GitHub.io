@@ -1,6 +1,14 @@
-# Detailed Description
+# CaTSper Processing Steps: A Detailed Description
 
-## Fourier Transformation
+## Time Domain Analysis
+
+The time delay $\Delta t$ is the extra time needed for the THz pulse to traverse through the sample thickness $H$, compared to the THz pulse traversing the same thickness in the reference measurement (air, refractive index $n_a = 1$). The effective refractive index $n_{eff}$ of the sample is thus calculated by
+
+$$ n_{eff} = \frac{\Delta t c}{H} + 1 $$
+
+where $c$ is the speed of light with a value of $\num{3e8} \SI{}{\metres\per\second}$
+
+## Fourier Transform
 
 ### Setting Frequency Range and Spectral Resolution
 
