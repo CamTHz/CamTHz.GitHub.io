@@ -4,6 +4,8 @@ This document aims to provide a detailed description to the scientific basis of 
 
 ## Time Domain Analysis
 
+<!-- updateThickness function? -->
+
 The time delay $\Delta t$ is the extra time needed for the THz pulse to traverse through the sample thickness $H$, compared to the THz pulse traversing the same thickness in the reference measurement (air, refractive index $n_a = 1$). The effective refractive index $n_{eff}$ of the sample is thus calculated by
 
 $$ n_{eff} = \frac{\Delta t c}{H} + 1 $$
