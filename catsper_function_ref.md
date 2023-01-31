@@ -6,7 +6,7 @@ The time delay $\Delta t$ is the extra time needed for the THz pulse to traverse
 
 $$ n_{eff} = \frac{\Delta t c}{H} + 1 $$
 
-where $c$ is the speed of light with a value of $3 \times 10^8$ ms$^{-1}$.
+where $c$ is the speed of light with a value of $3 \times 10^8$ ms $^{-1}$.
 
 ## Fourier Transform
 
