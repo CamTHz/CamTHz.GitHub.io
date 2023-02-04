@@ -18,6 +18,8 @@ $$ \Delta t_{1etl} = \Delta t + \frac{2H n_{eff}}{c}$$
 
 ## Fourier Transform
 
+The following and the user-selected processing options in CaTSper apply to both the reference and sample data.
+
 ### Windowing
 
 The time range in which relevant data needs to be Fourier transformed shall be specified. This can be done manually, or via the auto window function. The auto window centres the time range around the measured time delay with a symmetrical width that includes the time for first internal reflection, giving a resulting range of $\Delta t \pm (\Delta t_{1etl} - \Delta t)$.
@@ -32,6 +34,12 @@ The selected data does not have a time range that extends over $(- \infty, \inft
 - [Hann](https://uk.mathworks.com/help/signal/ref/hann.html): Raised cosine. The two end values are at zero. The function length is one greater than the data length. It is suitable for random signals and is good against spectral leakage.
 - [Taylor](https://uk.mathworks.com/help/signal/ref/taylorwin.html): The MATLAB default settings are used. The coefficients in the function are not normalised. After Fourier transform, it gives a narrow mainlobe with sidelobe values that decrease monotonically. It is suitable for radar applications.
 - [Triangular](https://uk.mathworks.com/help/signal/ref/triang.html): Symmetrical triangular function. If the length of the data has an odd value, the two end values are zero and the triangular peak is at one. If the length is instead even, the two end values are equal to the reciprocal of the length and a plateau instead of a triangular peak is resulted. The function length is the same as the data length.
+
+### Fast Fourier Transform
+
+The data is usually upsampled before Fourier transform. Upsampling approximates the situation when the signal is sampled at a higher rate. This is done by extending the data length, where the new length is determined by multipling the original length of data by a power of two. The exponent is specified by the user and should have a value greater than zero. The additional entries created beyond the original data length are filled with zeros.
+
+The augmented data is then respectively discrete Fourier transformed into frequency domain via [fast Fourier transformed (MATLAB built-in function)](https://uk.mathworks.com/help/matlab/ref/fft.html). A $N$-by-$N$ transformation matrix is multiplied with the data. $N$ takes the length of the augmented data, or the original data length if upsampling is not performed.
 
 ### Setting Frequency Range and Spectral Resolution
 
