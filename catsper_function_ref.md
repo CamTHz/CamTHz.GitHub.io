@@ -39,9 +39,17 @@ The selected data does not have a time range that extends over $(- \infty, \inft
 
 The data is usually upsampled before Fourier transform. Upsampling approximates the situation when the signal is sampled at a higher rate. This is done by extending the data length, where the new length is determined by multipling the original length of data by a power of two. The exponent is specified by the user and should have a value greater than zero. The additional entries created beyond the original data length are filled with zeros.
 
-The augmented data is then respectively discrete Fourier transformed into frequency domain via [fast Fourier transformed (MATLAB built-in function)](https://uk.mathworks.com/help/matlab/ref/fft.html). A $N$-by-$N$ transformation matrix is multiplied with the data. $N$ takes the length of the augmented data, or the original data length if upsampling is not performed.
+The augmented data is then respectively discrete Fourier transformed into frequency domain via [fast Fourier transform (MATLAB built-in function)](https://uk.mathworks.com/help/matlab/ref/fft.html). A $N$-by-$N$ transformation matrix is multiplied with the data. $N$ takes the length of the augmented data, or the original data length if upsampling is not performed.
 
-### Setting Frequency Range and Spectral Resolution
+### Frequency Range and Spectral Resolution
+
+The frequency range is specified by the user. It should be set based on considerations such as the instrument's signal-to-noise ratio, the range that gives relevant features, etc.
+
+The spectral resolution $v_{res}$ is defined by 
+
+$$ v_{res} = \frac{1}{t_{res} N} $$
+
+where $t_{res}$ is the time resolution of the measured signal in time domain.
 
 <!-- stopband? -->
 
