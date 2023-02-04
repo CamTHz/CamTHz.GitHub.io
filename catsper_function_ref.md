@@ -43,9 +43,9 @@ The augmented data is then respectively discrete Fourier transformed into freque
 
 ### Frequency Range and Spectral Resolution
 
-The frequency range is specified by the user. It should be set based on considerations such as the instrument's signal-to-noise ratio, the range that gives relevant features, etc.
+The frequency domain data will be trimmed according to the user-specified frequency range, which should be set based on considerations such as the instrument's signal-to-noise ratio, the range that gives relevant features, etc. Values beyond the upper limit can be trimmed right after Fourier transform, but those below the lower limit have to be trimmed after [phase unwrapping](), as otherwise erroneous values may result.
 
-The spectral resolution $v_{res}$ is defined by 
+The spectral resolution $v_{res}$ of the frequency-domain data is defined by 
 
 $$ v_{res} = \frac{1}{t_{res} N} $$
 
