@@ -81,6 +81,8 @@ where $\theta_{sample}$ is the frequency domain phase of the sample measurement 
 
 ### Absorption Coefficient
 
+The absorption coefficients are calculated by referencing [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005].
+
 ### Refractive Index
 
 The refractive index of the reference $n_{ref}$ is taken as one. The frequency-domain effective refractive index $n_{eff,FD}$ of the sample can be calculated as
@@ -97,3 +99,6 @@ where $\Delta H$ is the thickness difference between the sample and the referenc
 
 The MATLAB built-in function ['findpeaks'](https://uk.mathworks.com/help/signal/ref/findpeaks.html) is used to find peaks for a set of selected data (e.g. absorption coefficient $\alpha$) against another (e.g. frequency). A peak is defined such that it has a value greater than its adjacent neighbours or has a value of infinity. A minimum peak [prominence](https://uk.mathworks.com/help/signal/ug/prominence.html) can be specified such that only peaks with prominence greater than that will be recorded.
 
+## Bibliography
+
+[^Jepsen&Fischer2005]: Jepsen, P.U. and Fischer, B.M., 2005. Dynamic range in terahertz time-domain transmission and reflection spectroscopy. _Optics letters, 30_(1), pp.29-31.
