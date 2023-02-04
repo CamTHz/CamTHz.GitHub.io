@@ -20,10 +20,10 @@ $$ \Delta t_{1etl} = \Delta t + \frac{2H n_{eff}}{c}$$
 
 ### Windowing
 
-The time range in which relevant data needs to be Fourier transformed shall be specified. This can be done manually, or via the auto window function. The auto window centres the time range around the measured time delay with a symmetrical width that includes the time for first internal reflection, giving a resulting range of $Delta t \pm (\Delta t_{1etl} - \Delta t)$.
+The time range in which relevant data needs to be Fourier transformed shall be specified. This can be done manually, or via the auto window function. The auto window centres the time range around the measured time delay with a symmetrical width that includes the time for first internal reflection, giving a resulting range of $\Delta t \pm (\Delta t_{1etl} - \Delta t)$.
 <!-- double check auto window range -->
 
-The selected data does not have a time range that extends over $(- \inf, \inf)$, and may not not have an integer number of periods (i.e. the start and end value of the data are different over the specified time range). This may lead to discontinuities in the subsequent Fourier transform results. To mitigate this situation, the selected data should be multiplied with apodisation functions, which gradually tends to zero at both ends. The following lists the provided apodisation function options in CaTSper:
+The selected data does not have a time range that extends over $(- \infty, \infty)$, and may not not have an integer number of periods (i.e. the start and end value of the data are different over the specified time range). This may lead to discontinuities in the subsequent Fourier transform results. To mitigate this situation, the selected data should be multiplied with apodisation functions, which gradually tends to zero at both ends. The following lists the provided apodisation function options in CaTSper:
 
 - Boxcar: Heaviside step function. The values of the selected data are not changed and hence the function is suitable for transient data.
 - [Bartlett](https://uk.mathworks.com/help/signal/ref/bartlett.html): Symmetrical triangular function with zero as the two end values. The value at the triangular peak positively scales with the length of the data. The function length is the same as the data length. It gives little ripple in the results obtained after Fourier transform. 
