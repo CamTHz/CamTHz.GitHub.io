@@ -39,11 +39,11 @@ The selected data does not have a time range that extends over $(- \infty, \inft
 
 The data is usually upsampled before Fourier transform. Upsampling approximates the situation when the signal is sampled at a higher rate. This is done by extending the data length, where the new length is determined by multipling the original length of data by a power of two. The exponent is specified by the user and should have a value greater than zero. The additional entries created beyond the original data length are filled with zeros.
 
-The augmented data is then respectively discrete Fourier transformed into frequency domain via [fast Fourier transform (MATLAB built-in function)](https://uk.mathworks.com/help/matlab/ref/fft.html). A $N$-by-$N$ transformation matrix is multiplied with the data. $N$ takes the length of the augmented data, or the original data length if upsampling is not performed.
+The augmented data is then respectively discrete Fourier transformed into frequency domain via [fast Fourier transform (MATLAB built-in function)](https://uk.mathworks.com/help/matlab/ref/fft.html). A $N$-by-$N$ transformation matrix is multiplied with the data. $N$ takes the length of the augmented data, or the original data length if upsampling is not performed. After Fourier transform, the values in the frequency domain data are divided by the original data length (before upsampling) for scaling. 
 
 ### Frequency Range and Spectral Resolution
 
-The frequency domain data will be trimmed according to the user-specified frequency range, which should be set based on considerations such as the instrument's signal-to-noise ratio, the range that gives relevant features, etc. Values beyond the upper limit can be trimmed right after Fourier transform, but those below the lower limit have to be trimmed after [phase unwrapping](catsper_function_ref.md#amplitude-and-phase), as otherwise erroneous values may result.
+The frequency domain data will be trimmed according to the user-specified frequency range, which should be set based on considerations such as the instrument's signal-to-noise ratio, the range that gives relevant features, etc. Values beyond the upper limit can be trimmed right after Fourier transform, but those below the lower limit are only trimmed after [phase unwrapping](catsper_function_ref.md#amplitude-and-phase), as otherwise erroneous values may result.
 
 The spectral resolution $v_{res}$ of the frequency-domain data is defined by 
 
@@ -55,19 +55,29 @@ where $t_{res}$ is the time resolution of the measured signal in time domain.
 
 ### Amplitude and Phase
 
-Amplitude and phase data is obtained by unwrapping the frequency domain data. 
-The built-in MATLAB ['unwrap'](https://uk.mathworks.com/help/matlab/ref/unwrap.html) function is adopted as it eliminates discontinuities between consecutive phases by adding multiples of $\pm 2 \pi$ until the difference is less than $\pi$.
+Amplitude data are the scaled data obtained after fast Fourier transform. Phase data is obtained by unwrapping the frequency domain data. The built-in MATLAB ['unwrap'](https://uk.mathworks.com/help/matlab/ref/unwrap.html) function is adopted as it eliminates discontinuities between consecutive phases by adding multiples of $\pm 2 \pi$ until the difference is less than $\pi$.
 Due to the high signal-to-noise ratio at 0.8 THz, it is set as the starting point for unwrapping phase to reduce errors. This is instrument specific and one can change the value accordingly by accessing the 'TDSunwrap' function in the [Catsper.m](https://github.com/CamTHz/catsper/blob/main/Catsper.m) code.
 <!-- create this as an editable value on the app? then this sentence needs to be updated -->
 Frequency domain data, that corresponds to frequencies greater than 0.8 THz, will be unwrapped in increasing values starting at 0.8 THz, and vice versa for data corresponding to frequencies less than 0.8 THz.
 A straight line was fitted to unwrapped phase against frequency data from 0.05 to 0.4 THz. The intercept of the striaght line at 0 THz gives the phase offset. The phase offset is then applied to all phase data for correction.
-
 
 ## Frequency Domain Analysis
 
 ### Dynamic Range
 
 ### Transmittance
+
+The transmission amplitude $T$ is defined as
+
+$$ T(v) = \frac{|E_{sample(v)}|}{|E_{ref(v)}|} $$
+
+where $E_{sample}$ is the frequency domain amplitude of the sample measurement and $E_{ref}$ is the frequency domain amplitude of the reference.
+
+The transmission phase $\theta_T$ is defined as
+
+$$ \theta_T(v) = \theta_{ref}(v) - \theta_{sample}(v) $$
+
+where $\theta_{sample}$ is the frequency domain phase of the sample measurement $\theta_{ref}$is the frequency domain phase of the reference measurement.
 
 ### Absorption Coefficient
 
