@@ -6,9 +6,9 @@ This document aims to provide a detailed description to the scientific basis of 
 
 <!-- updateThickness function? -->
 
-The time delay $\Delta t$ is the extra time needed for the THz pulse to traverse through the sample thickness $H$, compared to the THz pulse traversing the same thickness in the reference measurement (air, refractive index $n_a = 1$). The effective refractive index $n_{eff}$ of the sample is thus calculated by
+The time delay $\Delta t$ is the extra time needed for the THz pulse to traverse through the sample thickness $H$, compared to the THz pulse traversing the same thickness in the reference measurement (air, refractive index $n_a = 1$). The time-domain effective refractive index $n_{eff,TD}$ of the sample is thus calculated by
 
-$$ n_{eff} = \frac{c \Delta t}{H} + 1 $$
+$$ n_{eff,TD} = \frac{c \Delta t}{H} + 1 $$
 
 where $c$ is the speed of light with a value of $3 \times 10^8$ ms $^{-1}$. $n_{eff}$ is calculated to four significant figures.
 
@@ -77,11 +77,17 @@ The transmission phase $\theta_T$ is defined as
 
 $$ \theta_T(v) = \theta_{ref}(v) - \theta_{sample}(v) $$
 
-where $\theta_{sample}$ is the frequency domain phase of the sample measurement $\theta_{ref}$is the frequency domain phase of the reference measurement.
+where $\theta_{sample}$ is the frequency domain phase of the sample measurement $\theta_{ref}$ is the frequency domain phase of the reference measurement.
 
 ### Absorption Coefficient
 
 ### Refractive Index
+
+The refractive index of the reference $n_{ref}$ is taken as one. The frequency-domain effective refractive index $n_{eff,FD}$ of the sample can be calculated as
+
+$$ n_{eff,FD}(v) = \frac{c \theta_T(v)}{2 \pi v \Delta H} + 1 $$
+
+where $\Delta H$ is the thickness difference between the sample and the reference.
 
 ### Dielectric Constant
 
@@ -89,5 +95,5 @@ where $\theta_{sample}$ is the frequency domain phase of the sample measurement 
 
 ### Finding Peaks
 
-The MATLAB built-in function [findpeaks](https://uk.mathworks.com/help/signal/ref/findpeaks.html) is used to find peaks for a set of selected data (e.g. absorption coefficient $\alpha$) against another (e.g. frequency). A peak is defined such that it has a value greater than its adjacent neighbours or has a value of infinity. A minimum peak [prominence](https://uk.mathworks.com/help/signal/ug/prominence.html) can be specified such that only peaks with prominence greater than that will be recorded.
+The MATLAB built-in function ['findpeaks'](https://uk.mathworks.com/help/signal/ref/findpeaks.html) is used to find peaks for a set of selected data (e.g. absorption coefficient $\alpha$) against another (e.g. frequency). A peak is defined such that it has a value greater than its adjacent neighbours or has a value of infinity. A minimum peak [prominence](https://uk.mathworks.com/help/signal/ug/prominence.html) can be specified such that only peaks with prominence greater than that will be recorded.
 
