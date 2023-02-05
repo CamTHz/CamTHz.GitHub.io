@@ -79,19 +79,32 @@ $$ \theta_T(v) = \theta_{ref}(v) - \theta_{sample}(v) $$
 
 where $\theta_{sample}$ is the frequency domain phase of the sample measurement $\theta_{ref}$ is the frequency domain phase of the reference measurement.
 
-### Absorption Coefficient
-
-The absorption coefficients are calculated by referencing [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005].
-
 ### Refractive Index
 
-The refractive index of the reference $n_{ref}$ is taken as one. The frequency-domain effective refractive index $n_{eff,FD}$ of the sample can be calculated as
+Both the refractive index of the reference $n_{ref}$ and the reference medeium $n_{refmed}$ are taken as one. The frequency-domain effective refractive index $n_{eff,FD}$ of the sample can be calculated as
 
 $$ n_{eff,FD}(v) = \frac{c \theta_T(v)}{2 \pi v \Delta H} + 1 $$
 
 where $\Delta H$ is the thickness difference between the sample and the reference.
 
+### Absorption Coefficient
+
+The method by [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005] is adapted to calculate absorption coefficient $\alpha$. $\alpha$ is determined by
+
+$$ \alpha (v) = -\frac{2}{\Delta H} \log_{10} \left(T(v) \frac{\left( n_{eff,FD}(v) + 1 \right)^{2}}{4 n_{eff,FD}(v)}  \right) $$
+<!-- this eqn is based on Jepsen and Fischer but with ln replaced with log10, this is different to current CaTSper code, may need update later after discussion -->
+
 ### Dielectric Constant
+
+The extinction coefficient $k$ is first calculated using the Beer-Lambert Law
+
+$$ k(v) = \frac{\alpha(v) c}{4 \pi v} $$
+
+The real and imaginary part of the dielectric constant $\kappa$ is then calculated separately by
+
+$$ \text{Re}(\kappa(v)) = n_{eff,FD}(v)^2 - k(v)^2 $$
+
+$$ \text{Im}(\kappa(v)) = 2 n_{eff,FD}(v) k(v) $$
 
 ## Data Manipulation
 
