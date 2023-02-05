@@ -25,19 +25,19 @@ The following and the user-selected processing options in CaTSper apply to both 
 The time range in which relevant data needs to be Fourier transformed shall be specified. This can be done manually, or via the auto window function. The auto window centres the time range around the measured time delay with a symmetrical width that includes the time for first internal reflection, giving a resulting range of $\Delta t \pm (\Delta t_{1etl} - \Delta t)$.
 <!-- double check auto window range -->
 
-The selected data does not have a time range that extends over $(- \infty, \infty)$, and may not not have an integer number of periods (i.e. the start and end value of the data are different over the specified time range). This may lead to discontinuities in the subsequent Fourier transform results. To mitigate this situation, the selected data should be multiplied with apodisation functions, which gradually tends to zero at both ends. The following lists the provided apodisation function options in CaTSper:
+The selected data does not have a time range that extends over $(- \infty, \infty)$, and may not have an integer number of periods (i.e. the start and end value of the data are different over the specified time range). This may lead to discontinuities in the subsequent Fourier transform results. To mitigate this situation, the selected data should be multiplied with apodisation functions, which gradually tends to zero at both ends. The following lists the provided apodisation function options in CaTSper:
 
 - Boxcar: Heaviside step function. The values of the selected data are not changed and hence the function is suitable for transient data.
 - [Bartlett](https://uk.mathworks.com/help/signal/ref/bartlett.html): Symmetrical triangular function with zero as the two end values. The value at the triangular peak positively scales with the length of the data. The function length is the same as the data length. It gives little ripple in the results obtained after Fourier transform. 
 - [Blackman](https://uk.mathworks.com/help/signal/ref/blackman.html): Summation of three cosine terms. The function is created with a length greater than the data length by one, and the removing the last value from the function. It is suitable for applications where minimal leakage is required.
-- [Hamming](https://uk.mathworks.com/help/signal/ref/hamming.html): Raised cosine. The two end values are not at zero. The function length is one greater than the data length. After Fourier transform, the sidelobes has a value lower than that of Hann, making Hamming suitable for optimising signal quality. 
+- [Hamming](https://uk.mathworks.com/help/signal/ref/hamming.html): Raised cosine. The two end values are not at zero. The function length is one greater than the data length. After Fourier transform, the side lobes has a value lower than that of Hann, making Hamming suitable for optimising signal quality. 
 - [Hann](https://uk.mathworks.com/help/signal/ref/hann.html): Raised cosine. The two end values are at zero. The function length is one greater than the data length. It is suitable for random signals and is good against spectral leakage.
-- [Taylor](https://uk.mathworks.com/help/signal/ref/taylorwin.html): The MATLAB default settings are used. The coefficients in the function are not normalised. After Fourier transform, it gives a narrow mainlobe with sidelobe values that decrease monotonically. It is suitable for radar applications.
+- [Taylor](https://uk.mathworks.com/help/signal/ref/taylorwin.html): The MATLAB default settings are used. The coefficients in the function are not normalised. After Fourier transform, it gives a narrow main lobe with side lobe values that decrease monotonically. It is suitable for radar applications.
 - [Triangular](https://uk.mathworks.com/help/signal/ref/triang.html): Symmetrical triangular function. If the length of the data has an odd value, the two end values are zero and the triangular peak is at one. If the length is instead even, the two end values are equal to the reciprocal of the length and a plateau instead of a triangular peak is resulted. The function length is the same as the data length.
 
 ### Fast Fourier Transform
 
-The data is usually upsampled before Fourier transform. Upsampling approximates the situation when the signal is sampled at a higher rate. This is done by extending the data length, where the new length is determined by multipling the original length of data by a power of two. The exponent is specified by the user and should have a value greater than zero. The additional entries created beyond the original data length are filled with zeros.
+The data is usually upsampled before Fourier transform. Upsampling approximates the situation when the signal is sampled at a higher rate. This is done by extending the data length, where the new length is determined by multiplying the original length of data by a power of two. The exponent is specified by the user and should have a value greater than zero. The additional entries created beyond the original data length are filled with zeros.
 
 The augmented data is then respectively discrete Fourier transformed into frequency domain via [fast Fourier transform (MATLAB built-in function)](https://uk.mathworks.com/help/matlab/ref/fft.html). A $N$-by-$N$ transformation matrix is multiplied with the data. $N$ takes the length of the augmented data, or the original data length if upsampling is not performed. After Fourier transform, the values in the frequency domain data are divided by the original data length (before upsampling) for scaling. 
 
@@ -57,7 +57,7 @@ Amplitude data are the scaled data obtained after fast Fourier transform. Phase 
 Due to the high signal-to-noise ratio at 0.8 THz, it is set as the starting point for unwrapping phase to reduce errors. This is instrument specific and one can change the value accordingly by accessing the 'TDSunwrap' function in the [Catsper.m](https://github.com/CamTHz/catsper/blob/main/Catsper.m) code.
 <!-- create this as an editable value on the app? then this sentence needs to be updated -->
 Frequency domain data, that corresponds to frequencies greater than 0.8 THz, will be unwrapped in increasing values starting at 0.8 THz, and vice versa for data corresponding to frequencies less than 0.8 THz.
-A straight line was fitted to unwrapped phase against frequency data from 0.05 to 0.4 THz. The intercept of the striaght line at 0 THz gives the phase offset. The phase offset is then applied to all phase data for correction.
+A straight line was fitted to unwrapped phase against frequency data from 0.05 to 0.4 THz. The intercept of the straight line at 0 THz gives the phase offset. The phase offset is then applied to all phase data for correction.
 
 ## Frequency Domain Analysis
 
@@ -91,7 +91,7 @@ where $\theta_{sample}$ is the frequency domain phase of the sample measurement 
 
 ### Refractive Index
 
-Refractice index is a material property which measures the ratio between the speed of light in vacuum to that in the material. Both the refractive index of the reference $n_{ref}$ and the reference medeium $n_{refmed}$ are taken as one. The frequency-domain effective refractive index $n_{eff,FD}$ of the sample can be calculated as
+Refractive index is a material property which measures the ratio between the speed of light in vacuum to that in the material. Both the refractive index of the reference $n_{ref}$ and the reference medium $n_{refmed}$ are taken as one. The frequency-domain effective refractive index $n_{eff,FD}$ of the sample can be calculated as
 
 $$ n_{eff,FD}(v) = \frac{c \theta_T(v)}{2 \pi v \Delta H} + 1 $$
 
