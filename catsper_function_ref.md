@@ -51,8 +51,6 @@ $$ v_{res} = \frac{1}{t_{res} N} $$
 
 where $t_{res}$ is the time resolution of the measured signal in time domain.
 
-<!-- stopband? -->
-
 ### Amplitude and Phase
 
 Amplitude data are the scaled data obtained after fast Fourier transform. Phase data is obtained by unwrapping the frequency domain data. The built-in MATLAB ['unwrap'](https://uk.mathworks.com/help/matlab/ref/unwrap.html) function is adopted as it eliminates discontinuities between consecutive phases by adding multiples of $\pm 2 \pi$ until the difference is less than $\pi$.
@@ -65,9 +63,21 @@ A straight line was fitted to unwrapped phase against frequency data from 0.05 t
 
 ### Dynamic Range
 
+In terahertz, the dynamic range $\text{DR}$ is defined as the ratio of the maximum amplitude magnitude to the root mean square of the noise floor [(Naftaly and Dudley, 2009)](https://doi.org/10.1364/OL.34.001213)[^Naftaly& Dudley2009]. The dynamic range in CaTSper is determined by the following according to [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005]
+
+$$ \text{DR} = $$
+<!-- double check eqn, current eqn in CaTSper do not fully resemble the eqn in Jepsen and Fischer -->
+
+The following parameters can be specified in CaTSper's DR Filter app by the user to calculate $\text{DR}$ in the region of interest:
+
+- Cutoff frequency: The data value at the cutoff frequency is defined as the noise floor
+- Upper limit frequency: Data at frequencies that are greater than the upper limit frequency are not considered in analysis
+- Stopband: Data that lie within the stopband frequency range are not considered in analysis
+<!-- double check def, anything more they define or have actions/processes associated -->
+
 ### Transmittance
 
-The transmission amplitude $T$ is defined as
+Transmittance measures the fraction of the terahertz wave that is transmitted through the sample to the detector. The transmission amplitude $T$ is defined as
 
 $$ T(v) = \frac{|E_{sample(v)}|}{|E_{ref(v)}|} $$
 
@@ -81,7 +91,7 @@ where $\theta_{sample}$ is the frequency domain phase of the sample measurement 
 
 ### Refractive Index
 
-Both the refractive index of the reference $n_{ref}$ and the reference medeium $n_{refmed}$ are taken as one. The frequency-domain effective refractive index $n_{eff,FD}$ of the sample can be calculated as
+Refractice index is a material property which measures the ratio between the speed of light in vacuum to that in the material. Both the refractive index of the reference $n_{ref}$ and the reference medeium $n_{refmed}$ are taken as one. The frequency-domain effective refractive index $n_{eff,FD}$ of the sample can be calculated as
 
 $$ n_{eff,FD}(v) = \frac{c \theta_T(v)}{2 \pi v \Delta H} + 1 $$
 
@@ -89,18 +99,21 @@ where $\Delta H$ is the thickness difference between the sample and the referenc
 
 ### Absorption Coefficient
 
-The method by [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005] is adapted to calculate absorption coefficient $\alpha$. $\alpha$ is determined by
+The absorption coefficient $\alpha$ quantifies the extent of loss in terahertz wave intensity through absorption. A higher value indicates higher absorption. The method by [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005] is adapted to calculate $\alpha$. In CaTSper, $\alpha$ is determined by
 
 $$ \alpha (v) = -\frac{2}{\Delta H} \log_{10} \left(T(v) \frac{\left( n_{eff,FD}(v) + 1 \right)^{2}}{4 n_{eff,FD}(v)}  \right) $$
 <!-- this eqn is based on Jepsen and Fischer but with ln replaced with log10, this is different to current CaTSper code, may need update later after discussion -->
 
-### Dielectric Constant
+### Extinction Coefficient
 
-The extinction coefficient $k$ is first calculated using the Beer-Lambert Law
+Similar to $\alpha$, the extinction coefficient $k$ is defined as the extent that terahertz wave can penetrate through the material. A higher value indicates a lower degree of penetration. $k$ is calculated using the Beer-Lambert Law
 
 $$ k(v) = \frac{\alpha(v) c}{4 \pi v} $$
 
-The real and imaginary part of the dielectric constant $\kappa$ is then calculated separately by
+### Dielectric Constant
+
+Permittivity measures the tendency of a material to be polarised by an electric field. The dielectric constant $\kappa$ is defined as the ratio between the permittivity of the material to that of vacuum. 
+The real and imaginary part of  $\kappa$ is then calculated separately by
 
 $$ \text{Re}(\kappa(v)) = n_{eff,FD}(v)^2 - k(v)^2 $$
 
@@ -113,5 +126,5 @@ $$ \text{Im}(\kappa(v)) = 2 n_{eff,FD}(v) k(v) $$
 The MATLAB built-in function ['findpeaks'](https://uk.mathworks.com/help/signal/ref/findpeaks.html) is used to find peaks for a set of selected data (e.g. absorption coefficient $\alpha$) against another (e.g. frequency). A peak is defined such that it has a value greater than its adjacent neighbours or has a value of infinity. A minimum peak [prominence](https://uk.mathworks.com/help/signal/ug/prominence.html) can be specified such that only peaks with prominence greater than that will be recorded.
 
 ## Bibliography
-
+[^Naftaly& Dudley2009]: Naftaly, M. and Dudley, R., 2009. Methodologies for determining the dynamic ranges and signal-to-noise ratios of terahertz time-domain spectrometers. _Optics letters, 34_(8), pp.1213-1215.
 [^Jepsen&Fischer2005]: Jepsen, P.U. and Fischer, B.M., 2005. Dynamic range in terahertz time-domain transmission and reflection spectroscopy. _Optics letters, 30_(1), pp.29-31.
