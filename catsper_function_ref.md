@@ -63,7 +63,7 @@ A straight line was fitted to unwrapped phase against frequency data from 0.05 t
 
 ### Dynamic Range
 
-In terahertz, the dynamic range $\text{DR}$ is defined as the ratio of the maximum amplitude magnitude to the root mean square of the noise floor [(Naftaly and Dudley, 2009)](https://doi.org/10.1364/OL.34.001213)[^Naftaly& Dudley2009]. The dynamic range in CaTSper is determined by the following according to [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005]
+In terahertz, the dynamic range $\text{DR}$ is defined as the ratio of the maximum amplitude magnitude to the root mean square of the noise floor [(Naftaly and Dudley, 2009)](https://doi.org/10.1364/OL.34.001213)[^Naftaly&Dudley2009]. The dynamic range in CaTSper is determined by the following according to [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005]
 
 $$ \text{DR} = $$
 <!-- double check eqn, current eqn in CaTSper do not fully resemble the eqn in Jepsen and Fischer -->
@@ -126,5 +126,5 @@ $$ \text{Im}(\kappa(v)) = 2 n_{eff,FD}(v) k(v) $$
 The MATLAB built-in function ['findpeaks'](https://uk.mathworks.com/help/signal/ref/findpeaks.html) is used to find peaks for a set of selected data (e.g. absorption coefficient $\alpha$) against another (e.g. frequency). A peak is defined such that it has a value greater than its adjacent neighbours or has a value of infinity. A minimum peak [prominence](https://uk.mathworks.com/help/signal/ug/prominence.html) can be specified such that only peaks with prominence greater than that will be recorded.
 
 ## Bibliography
-[^Naftaly& Dudley2009]: Naftaly, M. and Dudley, R., 2009. Methodologies for determining the dynamic ranges and signal-to-noise ratios of terahertz time-domain spectrometers. _Optics letters, 34_(8), pp.1213-1215.
+[^Naftaly&Dudley2009]: Naftaly, M. and Dudley, R., 2009. Methodologies for determining the dynamic ranges and signal-to-noise ratios of terahertz time-domain spectrometers. _Optics letters, 34_(8), pp.1213-1215.
 [^Jepsen&Fischer2005]: Jepsen, P.U. and Fischer, B.M., 2005. Dynamic range in terahertz time-domain transmission and reflection spectroscopy. _Optics letters, 30_(1), pp.29-31.
