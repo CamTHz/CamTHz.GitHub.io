@@ -66,7 +66,7 @@ A straight line was fitted to unwrapped phase against frequency data from 0.05 t
 In terahertz, the dynamic range $\text{DR}$ is defined as the ratio of the maximum amplitude magnitude to the root mean square of the noise floor [(Naftaly and Dudley, 2009)](https://doi.org/10.1364/OL.34.001213)[^Naftaly&Dudley2009]. The dynamic range in CaTSper is determined by the following according to [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005]
 
 $$ \text{DR} = $$
-<!-- double check eqn, current eqn in CaTSper do not fully resemble the eqn in Jepsen and Fischer -->
+<!-- double check eqn, current eqn in CaTSper do not fully resemble the eqn in Jepsen and Fischer; state this is modified with reference, ppl can edit although now should still be the same since n_medium/ref is degined as one -->
 
 The following parameters can be specified in CaTSper's DR Filter app by the user to calculate $\text{DR}$ in the region of interest:
 
