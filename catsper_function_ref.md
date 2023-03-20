@@ -1,10 +1,11 @@
 # CaTSper Processing Steps: A Detailed Description
 
-This document aims to provide a detailed description to the scientific basis of the processing steps involved in [CaTSper](https://github.com/CamTHz/catsper). A detailed in-line annotation of CaTSper's code is available here(**link to be inserted).
+This document aims to provide a detailed description to the scientific basis of the processing steps involved in [CaTSper](https://github.com/CamTHz/catsper). A step-by-step guide to using CaTSper is available [here](https://github.com/CamTHz/CamTHz.GitHub.io/blob/main/catsper_tutorial.md#catsper-step-by-step-tutorial)
+<!-- A detailed in-line annotation of CaTSper's code is available here. -->
 
 ## Time Domain Analysis
 
-The time delay $\Delta t$ is the extra time needed for the THz pulse to traverse through the sample thickness $H$, compared to the THz pulse traversing the same thickness in the reference measurement (air, refractive index $n_a = 1$). The time-domain effective refractive index $n_{eff,TD}$ of the sample is thus calculated by
+The time delay $\Delta t$ is the extra time needed for the THz pulse to traverse through the sample thickness $H$, compared to the THz pulse traversing the same thickness in the reference measurement (air, refractive index $n_{ref} = 1$). The time-domain effective refractive index $n_{eff,TD}$ of the sample is thus calculated by
 
 $$ n_{eff,TD} = \frac{c \Delta t}{H} + 1 $$
 
@@ -13,6 +14,9 @@ where $c$ is the speed of light with a value of $3 \times 10^8$ ms $^{-1}$. $n_{
 The time delay due to one internal reflection occurring $\Delta t_{1etl}$ is also considered. For one internal reflection, the THz pulse additionally travels through two times the sample thickness, compared to the original $\Delta t$. $\Delta t_{1etl}$ is thus calculated by
 
 $$ \Delta t_{1etl} = \Delta t + \frac{2H n_{eff}}{c}$$
+
+
+A step-by-step guide to CaTSper's time-domain analysis in CaTSper can be found [here](https://github.com/CamTHz/CamTHz.GitHub.io/blob/main/catsper_tutorial.md#time-domain-td-tab).  
 
 ## Fourier Transform
 
@@ -54,6 +58,8 @@ Amplitude data are the scaled data obtained after fast Fourier transform. Phase 
 Due to the high signal-to-noise ratio at 0.8 THz, it is set as the starting point for unwrapping phase to reduce errors. This is instrument specific and one can change the value accordingly by accessing the 'TDSunwrap' function in the [Catsper.m](https://github.com/CamTHz/catsper/blob/main/Catsper.m) code.
 Frequency domain data, that corresponds to frequencies greater than 0.8 THz, will be unwrapped in increasing values starting at 0.8 THz, and vice versa for data corresponding to frequencies less than 0.8 THz.
 A straight line was fitted to unwrapped phase against frequency data from 0.05 to 0.4 THz. The intercept of the straight line at 0 THz gives the phase offset. The phase offset is then applied to all phase data for correction.
+
+A step-by-step guide to Fourier transform in CaTSper can be found [here](https://github.com/CamTHz/CamTHz.GitHub.io/blob/main/catsper_tutorial.md#fast-fourier-transformation-fft).
 
 ## Frequency Domain Analysis
 
@@ -109,7 +115,7 @@ $$ \alpha (v) = -\frac{2}{\Delta H} \log_{10} \left(T(v) \frac{\text{Reference f
 
 In CaTSper's DR Filter app, the dynamic range of the determined $\alpha$ can be checked by the maximum absorption coefficient $\alpha_{max}$, which can be calculated from
 
-$$ \alpha_{max} (v) = frac{2}{H} \log_{10} \left(\text{DR} \frac{\text{Reference factor}}{\text{Sample factor}}  \right) $$
+$$ \alpha_{max} (v) = \frac{2}{H} \log_{10} \left(\text{DR} \frac{\text{Reference factor}}{\text{Sample factor}}  \right) $$
 
 with reference to [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005].
 
@@ -128,11 +134,15 @@ $$ \text{Re}(\kappa(v)) = n_{eff,FD}(v)^2 - k(v)^2 $$
 
 $$ \text{Im}(\kappa(v)) = 2 n_{eff,FD}(v) k(v) $$
 
+A step-by-step guide to CaTSper's frequency domain analysis can be found [here](https://github.com/CamTHz/CamTHz.GitHub.io/blob/main/catsper_tutorial.md#frequency-domain-fd-tab).
+
 ## Data Manipulation
 
 ### Finding Peaks
 
 The MATLAB built-in function ['findpeaks'](https://uk.mathworks.com/help/signal/ref/findpeaks.html) is used to find peaks for a set of selected data (e.g. absorption coefficient $\alpha$) against another (e.g. frequency). A peak is defined such that it has a value greater than its adjacent neighbours or has a value of infinity. A minimum peak [prominence](https://uk.mathworks.com/help/signal/ug/prominence.html) can be specified such that only peaks with prominence greater than that will be recorded.
+
+A step-by-step guide to data manipulation in CaTSper can be found [here](https://github.com/CamTHz/CamTHz.GitHub.io/blob/main/catsper_tutorial.md#data-manipulation-dm-tab).
 
 ## Bibliography
 [^Naftaly&Dudley2009]: Naftaly, M. and Dudley, R., 2009. Methodologies for determining the dynamic ranges and signal-to-noise ratios of terahertz time-domain spectrometers. _Optics letters, 34_(8), pp.1213-1215.
