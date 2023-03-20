@@ -110,11 +110,11 @@ $$ \text{Sample factor}(v) = \frac{4 n_{medium} n_{eff,FD}(v)}{\left( n_{medium}
 
 $\alpha$ is then calculated by
 
-$$ \alpha (v) = -\frac{2}{\Delta H} \log_{10} \left(T(v) \frac{\text{Reference factor}}{\text{Sample factor}}  \right) $$
+$$ \alpha (v) = -\frac{2}{\Delta H} \log_{10} \left(T(v) \frac{\text{Reference factor}}{\text{Sample factor} (v)}  \right) $$
 
 In CaTSper's DR Filter app, the dynamic range of $\alpha (v)$ can be checked by the maximum absorption coefficient $\alpha_{max} (v)$, which can be calculated by
 
-$$ \alpha_{max} (v) = \frac{2}{H} \log_{10} \left(\text{DR} \frac{\text{Reference factor}}{\text{Sample factor}}  \right) $$
+$$ \alpha_{max} (v) = \frac{2}{H} \log_{10} \left(\text{DR} \times \frac{\text{Reference factor}}{\text{Sample factor}(v)}  \right) $$
 
 which references the method in [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005].
 
