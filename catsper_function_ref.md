@@ -4,8 +4,6 @@ This document aims to provide a detailed description to the scientific basis of 
 
 ## Time Domain Analysis
 
-<!-- updateThickness function? -->
-
 The time delay $\Delta t$ is the extra time needed for the THz pulse to traverse through the sample thickness $H$, compared to the THz pulse traversing the same thickness in the reference measurement (air, refractive index $n_a = 1$). The time-domain effective refractive index $n_{eff,TD}$ of the sample is thus calculated by
 
 $$ n_{eff,TD} = \frac{c \Delta t}{H} + 1 $$
@@ -22,8 +20,7 @@ The following and the user-selected processing options in CaTSper apply to both 
 
 ### Windowing
 
-The time range in which relevant data needs to be Fourier transformed shall be specified. This can be done manually, or via the auto window function. The auto window centres the time range around the measured time delay with a symmetrical width that includes the time for first internal reflection, giving a resulting range of $\Delta t \pm (\Delta t_{1etl} - \Delta t)$.
-<!-- double check auto window range -->
+The time range in which relevant data needs to be Fourier transformed shall be specified. This can be done manually, or via the auto window function. The auto window has a time range of $(-\Delta t_{1etl} + \Delta t, \Delta t_{1etl})$. This makes sures the reference and sample signal are equally spaced from the auto window's axis of symmetry. In addition, the reference and sample signal are respectively spaced from the start and end of the auto window function at a time equivalent to the additional time taken for one internal reflection.
 
 The selected data does not have a time range that extends over $(- \infty, \infty)$, and may not have an integer number of periods (i.e. the start and end value of the data are different over the specified time range). This may lead to discontinuities in the subsequent Fourier transform results. To mitigate this situation, the selected data should be multiplied with apodisation functions, which gradually tends to zero at both ends. The following lists the provided apodisation function options in CaTSper:
 
@@ -55,7 +52,6 @@ where $t_{res}$ is the time resolution of the measured signal in time domain.
 
 Amplitude data are the scaled data obtained after fast Fourier transform. Phase data is obtained by unwrapping the frequency domain data. The built-in MATLAB ['unwrap'](https://uk.mathworks.com/help/matlab/ref/unwrap.html) function is adopted as it eliminates discontinuities between consecutive phases by adding multiples of $\pm 2 \pi$ until the difference is less than $\pi$.
 Due to the high signal-to-noise ratio at 0.8 THz, it is set as the starting point for unwrapping phase to reduce errors. This is instrument specific and one can change the value accordingly by accessing the 'TDSunwrap' function in the [Catsper.m](https://github.com/CamTHz/catsper/blob/main/Catsper.m) code.
-<!-- create this as an editable value on the app? then this sentence needs to be updated -->
 Frequency domain data, that corresponds to frequencies greater than 0.8 THz, will be unwrapped in increasing values starting at 0.8 THz, and vice versa for data corresponding to frequencies less than 0.8 THz.
 A straight line was fitted to unwrapped phase against frequency data from 0.05 to 0.4 THz. The intercept of the straight line at 0 THz gives the phase offset. The phase offset is then applied to all phase data for correction.
 
@@ -63,17 +59,13 @@ A straight line was fitted to unwrapped phase against frequency data from 0.05 t
 
 ### Dynamic Range
 
-In terahertz, the dynamic range $\text{DR}$ is defined as the ratio of the maximum amplitude magnitude to the root mean square of the noise floor [(Naftaly and Dudley, 2009)](https://doi.org/10.1364/OL.34.001213)[^Naftaly&Dudley2009]. The dynamic range in CaTSper is determined by the following according to [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005]
+In CaTSper's DR Filter app, the user can first specify the cutoff frequency $v_{cutoff}$. The noise floor $E_{ref}(v_{cutoff}$ is defined as the reference signal amplitude at $v_{cutoff}$. The dynamic range $\text{DR}$ can thus be defined as
 
-$$ \text{DR} = $$
-<!-- double check eqn, current eqn in CaTSper do not fully resemble the eqn in Jepsen and Fischer; state this is modified with reference, ppl can edit although now should still be the same since n_medium/ref is degined as one -->
+$$ \text{DR}(v) = \frac{E_{ref}(v)}{E_{ref}(v_{cutoff})} $$
 
-The following parameters can be specified in CaTSper's DR Filter app by the user to calculate $\text{DR}$ in the region of interest:
+where $E_{ref}(v)$ is the amplitude of the reference signal at frequency $v$.
 
-- Cutoff frequency: The data value at the cutoff frequency is defined as the noise floor
-- Upper limit frequency: Data at frequencies that are greater than the upper limit frequency are not considered in analysis
-- Stopband: Data that lie within the stopband frequency range are not considered in analysis
-<!-- double check def, anything more they define or have actions/processes associated -->
+The upper limit frequency can also be specified in CaTSper's DR Filter app so that data at frequencies that are greater than the upper limit frequency will not be considered for analysis in the next steps.
 
 ### Transmittance
 
@@ -99,10 +91,27 @@ where $\Delta H$ is the thickness difference between the sample and the referenc
 
 ### Absorption Coefficient
 
-The absorption coefficient $\alpha$ quantifies the extent of loss in terahertz wave intensity through absorption. A higher value indicates higher absorption. The method by [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005] is adapted to calculate $\alpha$. In CaTSper, $\alpha$ is determined by
+The absorption coefficient $\alpha$ quantifies the extent of loss in terahertz wave intensity through absorption. A higher value indicates higher absorption. The method by [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005] is used to calculate $\alpha$.
 
-$$ \alpha (v) = -\frac{2}{\Delta H} \log_{10} \left(T(v) \frac{\left( n_{eff,FD}(v) + 1 \right)^{2}}{4 n_{eff,FD}(v)}  \right) $$
-<!-- this eqn is based on Jepsen and Fischer but with ln replaced with log10, this is different to current CaTSper code, may need update later after discussion -->
+The reference factor is first determined from 
+
+$$ \text{Reference factor} = \frac{4 n_{medium} n_{ref}}{\left( n_{medium} + n_{ref} \right)^{2}} $$
+
+where $n_{medium}$ is the refractive index of the medium in which the experiment took place and $n_{ref}$ is the refractive index of the reference. Both $n_{medium}$ and $n_{ref}$ take a value of one to match the method in [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005].
+
+The sample factor is similarly defined as 
+
+$$ \text{Sample factor}(v) = \frac{4 n_{medium} n_{eff,FD}(v)}{\left( n_{medium} + n_{eff,FD}(v) \right)^{2}} $$
+
+$\alpha$ is then calculated by
+
+$$ \alpha (v) = -\frac{2}{\Delta H} \log_{10} \left(T(v) \frac{\text{Reference factor}}{\text{Sample factor}}  \right) $$
+
+In CaTSper's DR Filter app, the dynamic range of the determined $\alpha$ can be checked by the maximum absorption coefficient $\alpha_{max}$, which can be calculated from
+
+$$ \alpha_{max} (v) = frac{2}{H} \log_{10} \left(\text{DR} \frac{\text{Reference factor}}{\text{Sample factor}}  \right) $$
+
+with reference to [Jepsen and Fischer (2005)](https://doi.org/10.1364/OL.30.000029)[^Jepsen&Fischer2005].
 
 ### Extinction Coefficient
 
