@@ -1,14 +1,13 @@
 {% include breadcrumbs.html %}
 
 # CaTSper Step-by-step Tutorial
-This tutorial introduces the CaTSper tool and how to use it to calculate the frequency dependent absorption cofficient and refractive index spectra from a set of sample and reference time-domain waveforms, that were previously converted into the .thz file format using the CambridgeTHzConverter tool (https://github.com/CamTHz/CambridgeTHzConverter).
+This tutorial introduces the <b>CaTSper</b> tool and how to use it to calculate the frequency dependent absorption cofficient and refractive index spectra from a set of sample and reference time-domain waveforms, that were previously converted into the .thz file format using the [CambridgeTHzConverter tool](https://github.com/CamTHz/CambridgeTHzConverter). Please also refer to the [CaTSper Processing Steps](https://camthz.github.io/catsper_function_ref.html) documentation where the mathematical steps Catsper uses are outlined.
 
 * TOC
 {:toc}
 
 ## To Convert the Project Data
-Please follow the instructions in the CambridgeThzConverter tutorial documentation to generate a .thz file before using Catsper.
-
+Please follow the instructions in the [CambridgeThzConverter tutorial](https://camthz.github.io/CatsperConverter.html) documentation to generate a .thz file before using Catsper.
 
 ## To Load/Remove a Project into Catsper
 
@@ -38,9 +37,11 @@ Once all measurements are listed, the user can pick those of interest by click t
 
 The user can manually change the “Description” and “Thickness (mm)” edit field, and the latter one allows the “Refractive Index” and “1st internal reflection (ps)” to be automatically computed once a new positive value has been assigned to the “Thickness (mm)” edit field.
 
-![catsper td sample selection](/images/catsper/catsper_samples_selection.png)
+The calculations in these fields can be found <a href="https://camthz.github.io/catsper_function_ref.html#time-domain-analysis"><b>here</b></a>.
 
 To add this measurement to the “Selection” list box, the user can click the “ADD” button and measurement name will then appear in the “Selection” list box. Please note that only one measurement can be selected each time, so if you want to include all measurements, simply click the “ALL” button and all measurements will be added thereafter. If you want to remove some measurements already in the “Selection” list box, choose the target item in the “Selection” list box and click the “DEL” button. This item will then disappear from the “Selection” list box, however, it can still be found in the “Measurement” list box.
+
+![catsper td sample selection](/images/catsper/catsper_samples_selection.png)
 
 ### Save the list of measurements
 This functionality allows the user to pause the analysis and return at a later stage. Once the time-domain data have been selected and appeared in the “Selection” list box, the user can click the “SAVE TD DATA”. A message box will pop out to ask: “Do you want to save all data?”. If the user return “Yes”, then all list items in the “Measurement” list box will be saved in the .thz file, whereas “No, only the selected data” will only save those in the “Selection” list box.
@@ -62,6 +63,8 @@ The measurement contains waveforms for both the reference and the sample. The de
 The “FFT Settings” field is designated for the FFT and the FD analysis (see next section). The values assigned in the “FFT Settings” field serves globally for all items in the “Selection” list box.
 
 ![catsper td fftsettings](/images/catsper/catsper_td_fftsettings.png)
+
+The <b>mathematical steps</b> on the Fourier Transform we use in Catsper can be found <a href="https://camthz.github.io/catsper_function_ref.html#fourier-transform"><b>here</b></a>.
 
 “Frequency range” sets the range of frequencies for the FFT. The default values are 0.2 THz for the minimum frequency and 2.8 THz for the maximum frequency. The user can change these values in corresponding edit fields.
 
@@ -147,7 +150,7 @@ The user needs to select the FD data for analysis from the “FD List” list bo
 
 The “ALL” button loads all data from the “FD list” list box to the “FD Selection” list box whilst the “DEL” removes the selected item from the “FD Selection” list box.
 
-The “CALCULATE OPTICAL PARAMETERS” button will then evaluate the absorption, refractive index, and the dielectric constant for each item listed in the “FD Selection”
+The “CALCULATE OPTICAL PARAMETERS” button will then evaluate the absorption, refractive index, and the dielectric constant for each item listed in the “FD Selection”. The <b>mathematical steps</b> Catsper follows can be found <a href="https://camthz.github.io/catsper_function_ref.html#frequency-domain-analysis"><b>here</b></a>.
 
 The user can choose to plot and preview these constants under the “Frequency Domain (FD)” tab. In the “Plot Data” section, the “Transmittance” button can be pushed in, and its plot can be displayed prior to the absorption, refractive index, and the dielectric constant evaluation using the “CALCULATE” button. However, “Absorption”, “Refractive Index”, and the “Dielectric Constant” buttons are greyed out and can only be pushed in once these constants are evaluated.
 
@@ -241,7 +244,7 @@ Under the “Frequency Base” tab, the user can extract values at chosen terahe
 
 
 #### Peak Base Tab
-Under the “Peak Base” tab, the user can ask Catsper to find the peak on the frequency domain spectrum and plot the y-axis values where the peak is found against the data set number.
+Under the “Peak Base” tab, the user can ask Catsper to find the peak on the frequency domain spectrum and plot the y-axis values where the peak is found against the data set number. The user can find the <b>algorithm</b> Catsper uses to find peaks <a href="https://camthz.github.io/catsper_function_ref.html#data-manipulation"><b>here</b></a>.
 
 The user needs to define the minimum peak prominence (default value “0”), lower frequency limit (default value “1 THz”) and the number of peaks (default value “1”). Then, by clicking the “REARRANGE DATA” button, Catsper will locate the peaks above the chosen frequency limit.
 
