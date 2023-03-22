@@ -61,6 +61,8 @@ The measurement contains waveforms for both the reference and the sample. The de
 ### Fast Fourier Transformation (FFT)
 The “FFT Settings” field is designated for the FFT and the FD analysis (see next section). The values assigned in the “FFT Settings” field serves globally for all items in the “Selection” list box.
 
+![catsper td fftsettings](/images/catsper/catsper_td_fftsettings.png)
+
 “Frequency range” sets the range of frequencies for the FFT. The default values are 0.2 THz for the minimum frequency and 2.8 THz for the maximum frequency. The user can change these values in corresponding edit fields.
 
 “FFT Upsampling” has default value of zero filling and power of 2. The user can alter this power value by operating the spinner. Upsampling is the process to pad zeros at the high frequency component end on each side of the signal.
@@ -101,8 +103,12 @@ Once the FFT is done by clicking the “TRANSFORM” button under the “Time Do
 
 “[Measurement Name] ([Min.Time]-[Max.Time]ps/([Min.Freq.]-[Max.Freq.]THz/[Apodization Function]/[power of upsampling]upscale)”
 
+![catsper fd list](/images/catsper/catsper_fd_list.png)
+
 ### Choose the FD data for analysis
 This process is quite the same as the TD analysis. The user can pick those of interest by click the target item (and the selected item will be shaded). The user can click the “ADD” button and measurement name will then appear in the “FD Selection” list box. Please note that only one measurement can be selected each time, so if you want to include all measurements, simply click the “ALL” button and all measurements will be added thereafter. If you want to remove some measurements already in the “FD Selection” list box, choose the target item in the “FD Selection” list box and click the “DEL” button. This item will then disappear from the “FD Selection” list box, however, it can still be found in the “FD List” list box.
+
+![catsper fd selection](/images/catsper/catsper_fd_selection.png)
 
 ### Save the list of FD data
 Once the FD data have been selected and appeared in the “FD Selection” list box, the user can click the “SAVE FD DATA”. A message box will pop out to ask: “Do you want to save all data?”. If the user return “Yes”, then all list items in the “FD List” list box will be saved in the .mat file, whereas “No, only the selected data” will only save those in the “FD Selection” list box.
@@ -115,12 +121,18 @@ The operations are like those in the “Plot the TD data” section. Similarly, 
 
 Clicking the “PLOT1” button will generate the waveform plot on the “PLOT 1” axis whilst such plot will appear on the “PLOT 2” axis if the “PLOT2” button is pushed in. The user can plot the same measurement on both axes. These operations will generate the plots for all FD data in the “FD Selection” list box. If the user wishes to remove certain FD data from the plot, click the unwanted data and press “DEL”. Then click either the “PLOT1” or “PLOT2” button, and the new plot will override the previous plot.
 
-The default setting for the plot is plot “Both” the reference and sample waveforms under the “log” scale with “Amplitude” on the vertical axis. The user can customise the following changes by choosing a different radio button to the right-hand-side of the “FD selection” list box:
+The default setting for the plot is plot “Sample” waveforms under the “log” scale with “Amplitude” on the vertical axis. The user can customise the following changes by choosing a different radio button to the right-hand-side of the “FD selection” list box:<br>
+
+![catsper fd plot1](/images/catsper/catsper_fd_plot1.png)
 
 “Reference”: plot the reference waveforms only; <br>
 “Sample”: plot the sample waveforms only; <br>
 “Linear”: use the linear scale; <br>
-“Phase”: plot the phase (in degree form) against frequency (THz).
+“Phase”: plot the phase (in degree form) against frequency (THz).<br>
+
+An example of plotting "Both" in the "Log" space:<br>
+
+![catsper fd plot2](/images/catsper/catsper_fd_plot2.png)
 
 The user needs to click either the “PLOT1” or “PLOT2” button to update the plot or axes.
 
@@ -129,20 +141,25 @@ The default settings will generate the grid on the plot. If the user wants to tu
 ### FD data analysis
 In the “FD Data Analysis” field, the user can apply bandwidth filter to improve the signal quality for, extract and plot the “Transmittance”, “Absorption”, “Refractive Index” and “Dielectric Constant” from the measurements.
 
+![catsper fd dataanalysis](/images/catsper/catsper_fd_dataanalysis.png)
+
 The user needs to select the FD data for analysis from the “FD List” list box and press the “ADD” button in the “FD Data Analysis” field to import them into the “FD Selection” list box in this field. Note that this procedure is done separately to that outlined in the “Plot the FD data section”.
 
 The “ALL” button loads all data from the “FD list” list box to the “FD Selection” list box whilst the “DEL” removes the selected item from the “FD Selection” list box.
 
-The “CALCULATE” button will then evaluate the absorption, refractive index, and the dielectric constant for each item listed in the “FD Selection”
+The “CALCULATE OPTICAL PARAMETERS” button will then evaluate the absorption, refractive index, and the dielectric constant for each item listed in the “FD Selection”
 
 The user can choose to plot and preview these constants under the “Frequency Domain (FD)” tab. In the “Plot Data” section, the “Transmittance” button can be pushed in, and its plot can be displayed prior to the absorption, refractive index, and the dielectric constant evaluation using the “CALCULATE” button. However, “Absorption”, “Refractive Index”, and the “Dielectric Constant” buttons are greyed out and can only be pushed in once these constants are evaluated.
 
-The default setting pushes the “Transmittance” button in whereas another button needs to be pushed in when that constant can be plotted. For instance, if the user wished to plot refractive index on the vertical axis on the plot area 2, the user needs to push in the “Refractive Index” button first and click “PLOT 2” to the right-hand-side.
+The default setting pushes the “Transmittance” button in whereas another button needs to be pushed in when that constant can be plotted. For instance, if the user wished to plot absorption on the vertical axis on the plot area 2, the user needs to push in the “ABSORPTION” button first and click “PLOT 2” to the right-hand-side:<br>
+
+![catsper fd plot3](/images/catsper/catsper_fd_plot3.png)
 
 The “PLOT NEW” button to the bottom right corner of the “FD Data Analysis” field will open a new window and display the plot on this figure window.
 
 Once the user is satisfied with the FD data analysis, clicking “DATA MANIPULATION” button will transfer the evaluated transmittance, absorption, refractive index, and the dielectric constant to the “Data Manipulation (DM)” tab. This will also open the “Data Manipulation (DM)” tab for the user.
 
+![catsper fd datamanipulation](/images/catsper/catsper_fd_datamanipulation.png)
 
 ### Summary of all button functionalities under the “Frequency Domain” tab
 “ALL”: add all data sets from the “FD List” list box to the “FD Selection” list box <br>
